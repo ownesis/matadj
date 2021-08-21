@@ -2,14 +2,15 @@
 #define _MATADJ_H_
 
 #include <stdint.h>
+#include <stddef.h>
 
 typedef int **matrice_t;
 typedef void (*callback_t)(uint32_t col, int value, void *userdata);
 
 struct Matrice {
     int *(*matrice);
-    int row;
-    int col;
+    uint32_t row;
+    uint32_t col;
     size_t len;
 };
 typedef struct Matrice matrice_ctx_t;

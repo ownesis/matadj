@@ -101,11 +101,11 @@ size_t ma_get_len(matrice_ctx_t *matrice) {
 }
 
 _Bool ma_create_matrice(matrice_ctx_t *matrice, size_t size, int default_value) {
-    for (size_t i = 0; i < size; i++)
+    for (uint32_t i = 0; i < size; i++)
         if (!ma_new_entry(matrice, default_value))
             return 0;
 
-    for (size_t i = 0; i < matrice->row; i++) {
+    for (uint32_t i = 0; i < matrice->row; i++) {
         memset(matrice->matrice[i], default_value, matrice->col*sizeof(int));
     }
 
@@ -115,7 +115,7 @@ _Bool ma_foreach(matrice_ctx_t *matrice, uint32_t row, callback_t cb, void *user
     if (row >= matrice->row)
         return 0;
     
-    for (size_t i = 0; i < matrice->col; i++) {
+    for (uint32_t i = 0; i < matrice->col; i++) {
         cb(i, matrice->matrice[row][i], userdata);
     }
 
