@@ -4,13 +4,17 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#define MA_SET(m, r, c, v) \
+    m->matrice[r][c] = v
+
+#define MA_GET(m, r, c) \
+    m->matrice[r][c]
+
 typedef int **matrice_t;
 typedef void (*callback_t)(uint32_t col, int value, void *userdata);
 
 struct Matrice {
     int *(*matrice);
-    uint32_t row;
-    uint32_t col;
     size_t len;
 };
 typedef struct Matrice matrice_ctx_t;

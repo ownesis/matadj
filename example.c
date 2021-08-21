@@ -14,25 +14,27 @@ void cb(uint32_t col, int value, void *userdata) {
 
 int main(int argc, char *argv[]) {
     matrice_ctx_t *matrice_ctx = ma_init();
-    matrice_t matrice;
+    int value;
 
     ma_create_matrice(matrice_ctx, 20, 0);
-    printf("\n[+] Create a matrice of size: %s\n", argv[1]);
+    printf("\n[+] Create a matrice of size: 20\n");
     
     ma_new_entry(matrice_ctx, 0);
     printf("[+] Add a new entry, the matrice is now of size: %ld\n", ma_get_len(matrice_ctx));
 
-    matrice = ma_get_matrice(matrice_ctx);
-
     printf("[*] Connect row '1' with some column...\n\n");
-    matrice[1][0] = 1;
-    matrice[1][2] = 1;
-    matrice[1][3] = 1;
-    matrice[1][4] = 1;
-    matrice[1][8] = 1;
-    matrice[1][11] = 1;
-    matrice[1][16] = 1;
-    
+    MA_SET(matrice_ctx, 1, 0, 1);
+    MA_SET(matrice_ctx, 1, 2, 1);
+    MA_SET(matrice_ctx, 1, 3, 1);
+    MA_SET(matrice_ctx, 1, 4, 1);
+    MA_SET(matrice_ctx, 1, 8, 1);
+    MA_SET(matrice_ctx, 1, 11, 1);
+    MA_SET(matrice_ctx, 1, 16, 1);
+    MA_SET(matrice_ctx, 4, 2, 42);
+
+    value = MA_GET(matrice_ctx, 4, 2);
+    printf("[i] '%d' inside index [4][2]\n\n", value);
+
     ma_print_matrice(matrice_ctx);
 
     printf("\n[i] The row 1 is connected with the following column:\n");

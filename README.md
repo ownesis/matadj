@@ -94,8 +94,35 @@ ma_print_matrice(matrice_ctx);
 ```
 
 ### Assigner une valeur dans la matrice
-Utilisation comme un tableau à deux dimension
+Avec `ma_get_matrice()`
 ```c
 matrice_t matrice = ma_get_matrice(matrice_ctx);
 matrice[4][2] = 42;
+```
+Avec la macro `MA_SET()`
+**Arguments**
+> m: `matrice_ctx_t`
+> r: row `uint32_t`
+> c: column `uint32_t`
+> v: value `int`
+```c
+MA_SET(matrice_ctx, 4, 2, 42);
+```
+
+### Récupérer une valeur dans la matrice
+Avec `ma_get_matrice()`
+```c
+matrice_t matrice = ma_get_matrice(matrice_ctx);
+int val = matrice[4][2];
+```
+Avec la macro `MA_GET()`
+**Arguments**
+> m: `matrice_ctx_t`
+> r: row `uint32_t`
+> c: column `uint32_t`
+
+**Retour**
+> Retourne la valeur à l'index indiqué
+```c
+int val = MA_SET(matrice_ctx, 4, 2);
 ```
