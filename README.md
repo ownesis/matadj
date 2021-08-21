@@ -26,7 +26,9 @@ ma_destroy(matrice_ctx);
 ### Crééer une matrice d'une taille donnée
 **Arguments**
 > matrice: `matrice\_ctx\_t`
+
 > size: `size_t`
+
 > default\_value: `int`
 
 **Retour**
@@ -39,6 +41,7 @@ _Bool ret = ma_create_matrice(marice_ctx, 10, 0);
 ### Ajouter une nouvelle entrée dans la matrice
 **Arguments**
 > matrice: `matrice_ctx_t`
+
 > default\_value: `int`
 
 **Retour**
@@ -71,9 +74,13 @@ matrice_t matrice = ma_get_matrice(matrice_ctx);
 ### Parcourir les valeurs de chaque colonne d'une ligne donnée.
 **Arguments**
 > matrice: `matrice_ctx_t`
+
 > row: `uint32_t`
+
 > callback: `callback_t` alias `void (*)(uint32_t col, int value, void *userdata)`
+
 > userdata: `void *`
+
 l'argument `userdata` est un argument optionnel, il est utile si l'utilisateur veut faire passer un objet (structure, tableau, variable...) utile pour la fonction appelé.
 Voir cet [exemple](example_with_userdata.c)
 
@@ -104,8 +111,11 @@ matrice[4][2] = 42;
 Avec la macro `MA_SET()`
 **Arguments**
 > m: `matrice_ctx_t`
+
 > r: row `uint32_t`
+
 > c: column `uint32_t`
+
 > v: value `int`
 ```c
 MA_SET(matrice_ctx, 4, 2, 42);
@@ -119,8 +129,11 @@ int val = matrice[4][2];
 ```
 Avec la macro `MA_GET()`
 **Arguments**
+
 > m: `matrice_ctx_t`
+
 > r: row `uint32_t`
+
 > c: column `uint32_t`
 
 **Retour**
