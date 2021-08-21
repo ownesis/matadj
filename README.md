@@ -74,6 +74,8 @@ matrice_t matrice = ma_get_matrice(matrice_ctx);
 > row: `uint32_t`
 > callback: `callback_t` alias `void (*)(uint32_t col, int value, void *userdata)`
 > userdata: `void *`
+l'argument `userdata` est un argument optionnel, il est utile si l'utilisateur veut faire passer un objet (structure, tableau, variable...) utile pour la fonction appelé.
+Voir cet [exemple](example_with_userdata.c)
 
 **Retour**
 > Retourne `1` en cas de succès ou `0` en cas d'erreur.
