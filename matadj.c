@@ -6,6 +6,57 @@
 static _Bool _ma_extend(matrice_ctx_t *matrice);
 static _Bool _ma_append(matrice_ctx_t *matrice);
 
+_Bool ma_ne_create_matrice(matrice_ne_ctx_t *matrice, size_t size, int default_value) {
+    matrice->matrice = calloc(size*size, sizeof(int)); 
+    if (!matrice->matrice)
+        return 0;
+
+    if (!memset(matrice->matrice, default_value, size*sizeof(int)))
+        return 0;
+
+    matrice->len = size;
+    
+    return 1;
+}
+
+matrice_ne_ctx_t *ma_ne_init(void) {
+    matrice_ne_ctx_t *matrice = malloc(sizeof(matrice_ne_ctx_t));
+    
+    if(!memset(matrice, 0, sizeof(matrice_ne_ctx_t)))
+        return NULL;
+    
+    matrice->matrice = NULL;
+
+    return matrice;
+}
+
+void ma_ne_destroy(matrice_ne_ctx_t *matrice) {
+    free(matrice->matrice);
+    free(matrice);
+}
+
+void ma_ne_print_matrice(matrice_ne_ctx_t *matrice) {
+    for (size_t i = 0; i < matrice->len; i++) {
+        printf(" (%ld)\t", i);
+        for (size_t j = 0; j < matrice->len; j++) {
+            printf("[%d]", MA_NE_GET(matrice, i, j));
+        }
+        printf("\n");
+    }
+}
+
+_Bool ma_ne_foreach(matrice_ne_ctx_t *matrice, uint32_t row, callback_t cb, void *userdata) {
+    if (row >= matrice->len)
+        return 0;
+    
+    for (size_t i = 0; i < matrice->len; i++) {
+        cb(i, MA_NE_GET(matrice, row, i), userdata);
+    }
+
+    return 1;
+}
+
+
 /* add row */
 static _Bool _ma_extend(matrice_ctx_t *matrice) {
     int *(*tmp) = NULL;
@@ -43,7 +94,9 @@ static _Bool _ma_append(matrice_ctx_t *matrice) {
 matrice_ctx_t *ma_init(void) {
     matrice_ctx_t *matrice = malloc(sizeof(matrice_ctx_t));
     
-    memset(matrice, 0, sizeof(matrice_ctx_t));
+    if (!memset(matrice, 0, sizeof(matrice_ctx_t)))
+        return NULL;
+
     matrice->matrice = malloc(1);
 
     return matrice;
@@ -89,10 +142,6 @@ void ma_print_matrice(matrice_ctx_t *matrice) {
 
 matrice_t ma_get_matrice(matrice_ctx_t *matrice) {
     return matrice->matrice;
-}
-
-size_t ma_get_len(matrice_ctx_t *matrice) {
-    return matrice->len;
 }
 
 _Bool ma_create_matrice(matrice_ctx_t *matrice, size_t size, int default_value) {
