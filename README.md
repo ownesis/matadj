@@ -132,7 +132,7 @@ int val = MA_SET(matrice_ctx, 4, 2);
 
 ## Matrice NON extensible
 La matrice non extensible est plus rapide lors de sa generation.
-Seulement 2 allocations executé contrairement à la [**Matrice extensible**](#Matrice-exensible) qui est, en notation [Big O](https://en.wikipedia.org/wiki/Big_O_notation) de `O(n²)` (n = taille de la matrice).
+Seulement 2 allocations executé contrairement à la [**Matrice extensible**](#Matrice-extensible) qui est, en notation [Big O](https://en.wikipedia.org/wiki/Big_O_notation) de `O(n²)` (n = taille de la matrice).
 ### Initialiser le context de la matrice
 **Retour**
 > Retourne un pointer vers `matrice_ne_ctx_t`
